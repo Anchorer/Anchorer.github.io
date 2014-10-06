@@ -61,10 +61,10 @@
       
         <h2 id="问题定义">问题定义</h2>
 <p>最近在做视频播放器相关的开发，想要达到的一个目标是，利用原生的播放器组件实现在线视频的播放。在做了一番探索后，我完成了两套视频播放器的组件，均支持自定义播放界面的UI。其中一套是基于Android系统原生的MediaPlayer和VideoView，另一套是基于vitamio，这两套组件支持的视频格式是不相同的，而我做的工作是将其组件化，增加了可以支持自定义UI的特性。</p>
-<p>原生VideoView实际上是将一个MediaPlayer和一个操作栏相结合，增加了一系列视频播放控制的操作而实现。其中，VideoView的视频控制栏的UI是Framework层实现的，用户无法进行自定义的布局。关于这一点可以参考这篇文章：<a href="&quot;http://www.2cto.com/kf/201202/120648.html&quot;">Android Framework中的PolicyManager简介</a>。因此，需要寻找一种办法，实现自定义UI的特性。</p>
+<p>原生VideoView实际上是将一个MediaPlayer和一个操作栏相结合，增加了一系列视频播放控制的操作而实现。其中，VideoView的视频控制栏的UI是Framework层实现的，用户无法进行自定义的布局。关于这一点可以参考这篇文章：<a href="http://www.2cto.com/kf/201202/120648.html" target="_blank" rel="external">Android Framework中的PolicyManager简介</a>。因此，需要寻找一种办法，实现自定义UI的特性。</p>
 <h2 id="探索基础">探索基础</h2>
 <p>首先第一步要做的就是将原生VideoView中利用Framework层实现的UI布局部分替换成自己的实现方案。在这一部分，我参考了这篇文章：</p>
-<p><a href="&quot;http://www.brightec.co.uk/blog/custom-android-media-controller&quot;">Custom Android media controller</a></p>
+<p><a href="http://www.brightec.co.uk/blog/custom-android-media-controller" target="_blank" rel="external">Custom Android media controller</a></p>
 <p>通过以上这篇文章的步骤，我们可以得到一个通过布局文件生成的播放器控制栏。这样就为自定义的UI实现了可能。</p>
 <h2 id="我所做的封装和改进">我所做的封装和改进</h2>
 <p>我做的就是在上面这个库的基础上，将通过布局文件生成控制栏的功能进行了进一步的封装，改进成了一个比较容易、灵活的支持自定义UI的组件。我做了如下事情：</p>
@@ -80,11 +80,11 @@
 <p>当我们自定义MediaControllerGenerator接口的实现时，生成的也是这样一个控件集合类的对象。这样一来，我们所要做的工作就变成了，从自定义的xml布局文件中生成一系列控件，然后将这些控件封装在一起生成一个BaseMediaControllerHolder类，将这个类与MediaController绑定即可。</p>
 <h4 id="3-_在Activity中的应用">3. 在Activity中的应用</h4>
 <p>至此，我们已经实现了一个自定义UI的MediaController，接下来只要再实现MediaPlayer和该MediaController绑定就可以了，而这个绑定过程其实也就是原生MediaPlayer的使用方法，也就变得顺理成章了。该组件可以在我的Github上查看：</p>
-<p><a href="&quot;https://github.com/Anchorer/NativeVideoPlayerComponent&quot;">Anchorer/NativeVideoPlayerComponent</a></p>
+<p><a href="https://github.com/Anchorer/NativeVideoPlayerComponent" target="_blank" rel="external">Anchorer/NativeVideoPlayerComponent</a></p>
 <p>其中，MediaPlayer的其他必需的控制操作，我专门实现了一个BaseNativeVideoPlayerActivity的基类Activity，我们只要继承这个Activity实现自己的视频播放Activity即可。</p>
 <p>关于该组件的具体使用方法，可以参考example中的Demo。</p>
 <h2 id="不足与改进">不足与改进</h2>
-<p>如果你做过基于Android原生视频播放器的相关开发，你就会了解，Android原生的视频播放器支持的视频格式是非常有限的。（可以参考：<a href="&quot;http://developer.android.com/guide/appendix/media-formats.html&quot;">Supported Media Formats</a>）</p>
+<p>如果你做过基于Android原生视频播放器的相关开发，你就会了解，Android原生的视频播放器支持的视频格式是非常有限的。（可以参考：<a href="http://developer.android.com/guide/appendix/media-formats.html" target="_blank" rel="external">Supported Media Formats</a>）</p>
 <p>为了对各种类型的视频做一些支持，需要在此基础上多做一些工作。实际上，这就是vitamio所做的。我完成的第二套播放器的组件，也是在vitamio的基础上，增加了自己实现的一个自定义UI的特性。</p>
 
       
